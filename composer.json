@@ -1,0 +1,27 @@
+{
+  "name": "kodicomponents/laravelvalidationrules",
+  "description": "",
+  "homepage": "http://laravel.com",
+  "keywords": ["laravel", "validation", "rules"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Pavel Buchnev",
+      "email": "butschster@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.6.4",
+    "illuminate/validation": "5.3.*",
+    "nesbot/carbon": "~1.20"
+  },
+  "require-dev": {
+    "mockery/mockery": "0.9.*",
+    "phpunit/phpunit": "~5.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "KodiComponents\\LaravelValidationRules\\": "src/"
+    }
+  }
+}
