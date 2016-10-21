@@ -4,6 +4,9 @@ namespace KodiComponents\LaravelValidationRules;
 
 use Carbon\Carbon;
 
+/**
+ * @see https://laravel.com/docs/5.3/validation#available-validation-rules
+ */
 class Rule
 {
     /**
@@ -13,7 +16,6 @@ class Rule
      * @see https://laravel.com/docs/5.3/validation#rule-accepted
      */
     const ACCEPTED = 'accepted';
-
     /**
      * The field under validation must be a valid URL according to the `checkdnsrr` PHP function.
      *
@@ -129,7 +131,7 @@ class Rule
      *
      * @return Rules\DateFormat
      */
-    public function date_format($format = null)
+    public function dateFormat($format = null)
     {
         return new Rules\DateFormat($format);
     }
@@ -172,7 +174,7 @@ class Rule
      *
      * @return string
      */
-    public function digits_between($min, $max)
+    public function digitsBetween($min, $max)
     {
         return 'digits_between:'.$min.','.$max;
     }
@@ -223,7 +225,7 @@ class Rule
      *
      * @return string
      */
-    public function in_array($field)
+    public function inArray($field)
     {
         return 'in_array:'.$field;
     }
@@ -248,4 +250,243 @@ class Rule
      * @see https://laravel.com/docs/5.3/validation#rule-json
      */
     const JSON = 'json';
+
+    /**
+     * The field under validation must be less than or equal to a maximum value.
+     *
+     * @see https://laravel.com/docs/5.3/validation#rule-max
+     *
+     * @param string $value Strings, numerics, and files are evaluated in the same fashion as the size rule.
+     *
+     * @return string
+     */
+    public function max($value)
+    {
+        return 'max:'.$value;
+    }
+
+    /**
+     * The file under validation must match one of the given MIME types
+     *
+     * To determine the MIME type of the uploaded file, the file's contents will be read and the framework will
+     * attempt to guess the MIME type, which may be different from the client provided MIME type.
+     *
+     * @param array $types
+     *
+     *      'video' => 'mimetypes:video/avi,video/mpeg,video/quicktime'
+     *
+     * @return Rules\MimeTypes
+     */
+    public function mimeTypes(array $types = [])
+    {
+        return new Rules\MimeTypes($types);
+    }
+
+    /**
+     * The field under validation must have a minimum value.
+     *
+     * @see https://laravel.com/docs/5.3/validation#rule-min
+     *
+     * @param string $value Strings, numerics, and files are evaluated in the same fashion as the size rule.
+     *
+     * @return string
+     */
+    public function min($value)
+    {
+        return 'min:'.$value;
+    }
+
+    /**
+     * The field under validation may be null. This is particularly useful when validating primitive such as
+     * strings and integers that can contain null values.
+     *
+     * @see https://laravel.com/docs/5.3/validation#rule-nullable
+     */
+    const NULLABLE = 'nullable';
+
+    /**
+     * The field under validation must be numeric.
+     *
+     * @see https://laravel.com/docs/5.3/validation#rule-numeric
+     */
+    const NUMERIC = 'numeric';
+
+    /**
+     * The field under validation must be present in the input data but can be empty.
+     *
+     * @see https://laravel.com/docs/5.3/validation#rule-present
+     */
+    const PRESENT = 'present';
+
+    /**
+     * The field under validation must match the given regular expression.
+     *
+     * When using the regex pattern, it may be necessary to specify rules in an array instead of using pipe delimiters,
+     * especially if the regular expression contains a pipe character.
+     *
+     * @see https://laravel.com/docs/5.3/validation#rule-regex
+     *
+     * @param string $pattern
+     *
+     * @return string
+     */
+    public function regex($pattern)
+    {
+        return 'regex:'.$pattern;
+    }
+
+    /**
+     * The field under validation must be present in the input data and not empty. A field is considered "empty"
+     * if one of the following conditions are true:
+     *  - The value is null.
+     *  - The value is an empty string.
+     *  - The value is an empty array or empty `Countable` object.
+     *  - The value is an uploaded file with no path.
+     *
+     * @see https://laravel.com/docs/5.3/validation#rule-required
+     */
+    const REQUIRED = 'required';
+
+    /**
+     * The field under validation must be present and not empty if the anotherfield field is equal to any value.
+     *
+     * @see https://laravel.com/docs/5.3/validation#rule-required-if
+     *
+     * @param string $anotherField
+     * @param array ...$value
+     *
+     * @return string
+     */
+    public function requiredIf($anotherField, ...$value)
+    {
+        return 'required_if:'.$anotherField.','.implode(',', $value);
+    }
+
+    /**
+     * The field under validation must be present and not empty unless the anotherfield field is equal to any value.
+     *
+     * @see https://laravel.com/docs/5.3/validation#rule-required-unless
+     *
+     * @param string $anotherField
+     * @param array ...$value
+     *
+     * @return string
+     */
+    public function requiredUnless($anotherField, ...$value)
+    {
+        return 'required_unless:'.$anotherField.','.implode(',', $value);
+    }
+
+    /**
+     * The field under validation must be present and not empty only if any of the other specified fields are present.
+     *
+     * @see https://laravel.com/docs/5.3/validation#rule-required-with
+     *
+     * @param array ...$field other specified fields
+     *
+     * @return string
+     */
+    public function requiredWith(...$field)
+    {
+        return 'required_with:'.implode(',', $field);
+    }
+
+    /**
+     * The field under validation must be present and not empty only if all of the other specified fields are present.
+     *
+     * @see https://laravel.com/docs/5.3/validation#rule-required-with-all
+     *
+     * @param array ...$field other specified fields
+     *
+     * @return string
+     */
+    public function requiredWithAll(...$field)
+    {
+        return 'required_with_all:'.implode(',', $field);
+    }
+
+    /**
+     * The field under validation must be present and not empty only when any of the other specified fields are not
+     * present.
+     *
+     * @see https://laravel.com/docs/5.3/validation#rule-required-without
+     *
+     * @param array ...$field other specified fields
+     *
+     * @return string
+     */
+    public function requiredWithout(...$field)
+    {
+        return 'required_without:'.implode(',', $field);
+    }
+
+    /**
+     * The field under validation must be present and not empty only when all of the other specified fields are not
+     * present.
+     *
+     * @see https://laravel.com/docs/5.3/validation#rule-required-without-all
+     *
+     * @param array ...$field other specified fields
+     *
+     * @return string
+     */
+    public function requiredWithoutAll(...$field)
+    {
+        return 'required_without_all:'.implode(',', $field);
+    }
+
+    /**
+     * The given field must match the field under validation.
+     *
+     * @see https://laravel.com/docs/5.3/validation#rule-same
+     *
+     * @param string $field
+     *
+     * @return string
+     */
+    public function same($field)
+    {
+        return 'same:'.$field;
+    }
+
+    /**
+     * The field under validation must have a size matching the given value.
+     *  - For string data, value corresponds to the number of characters.
+     *  - For numeric data, value corresponds to a given integer value.
+     *  - For an array, size corresponds to the count of the array.
+     *  - For files, size corresponds to the file size in kilobytes.
+     *
+     * @see https://laravel.com/docs/5.3/validation#rule-size
+     *
+     * @param string $value
+     *
+     * @return string
+     */
+    public function size($value)
+    {
+        return 'size:'.$value;
+    }
+
+    /**
+     * The field under validation must be a string. If you would like to allow the field to also be null,
+     * you should assign the `nullable` rule to the field.
+     *
+     * @see https://laravel.com/docs/5.3/validation#rule-string
+     */
+    const STRING = 'string';
+
+    /**
+     * The field under validation must be a valid timezone identifier according to the
+     * `timezone_identifiers_list` PHP function.
+     *
+     * @see https://laravel.com/docs/5.3/validation#rule-timezone
+     */
+    const TIMEZONE = 'timezone';
+
+    /**
+     * The field under validation must be a valid URL.
+     *
+     * @see https://laravel.com/docs/5.3/validation#rule-url
+     */
+    const URL = 'url';
 }
